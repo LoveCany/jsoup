@@ -278,7 +278,7 @@ public class XmlTreeBuilderTest {
         Document doc = Jsoup.parse("<p one='&lt;two&gt;&copy'>Three</p>", "", Parser.xmlParser());
         assertEquals(doc.outputSettings().syntax(), Syntax.xml);
         assertEquals(doc.outputSettings().escapeMode(), Entities.EscapeMode.xhtml);
-        assertEquals("<p one=\"&lt;two>©\">Three</p>", doc.html()); // only the < should be escaped
+        assertEquals("<p one=\"&lt;two&gt;©\">Three</p>", doc.html()); // only the < should be escaped
     }
 
     @Test public void xmlSyntaxEscapesLtInAttributes() {
@@ -288,6 +288,16 @@ public class XmlTreeBuilderTest {
         doc.outputSettings().charset("ascii"); // to make sure &copy; is output
         assertEquals(doc.outputSettings().syntax(), Syntax.xml);
         assertEquals("<p one=\"&lt;two>&copy;\">Three</p>", doc.html());
+    }
+
+    @Test public void xmlSyntaxEscapesRtInAttributes() {
+        // Make sure > is escaped in attributes in xhtml escape mode
+        // https://github.com/jhy/jsoup/issues/1724
+        Document doc = Jsoup.parse("<input class=\"text\" value=\" > data < \"/>", "", Parser.xmlParser());
+        doc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);
+        doc.outputSettings().charset("ascii");
+        assertEquals(doc.outputSettings().syntax(), Syntax.xml);
+        assertEquals("<input class=\"text\" value=\" &gt; data &lt; \">", doc.html());
     }
 
     @Test void xmlOutputCorrectsInvalidAttributeNames() {

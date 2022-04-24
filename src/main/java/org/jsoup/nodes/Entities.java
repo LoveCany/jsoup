@@ -209,7 +209,8 @@ public class Entities {
                             accum.append(c);
                         break;
                     case '>':
-                        if (!inAttribute)
+                        // should escape in xhtml mode, although in xml syntax it could be ignored by default
+                        if (!inAttribute || escapeMode == EscapeMode.xhtml)
                             accum.append("&gt;");
                         else
                             accum.append(c);

@@ -149,7 +149,7 @@ public class EntitiesTest {
         assertEquals("<a title=\"<p>One</p>\">One</a>", element.outerHtml());
 
         doc.outputSettings().escapeMode(xhtml);
-        assertEquals("<a title=\"&lt;p>One&lt;/p>\">One</a>", element.outerHtml());
+        assertEquals("<a title=\"&lt;p&gt;One&lt;/p&gt;\">One</a>", element.outerHtml());
     }
 
     @Test public void controlCharactersAreEscaped() {
