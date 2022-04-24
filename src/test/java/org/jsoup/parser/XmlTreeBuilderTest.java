@@ -290,6 +290,7 @@ public class XmlTreeBuilderTest {
         assertEquals("<p one=\"&lt;two>&copy;\">Three</p>", doc.html());
     }
 
+    // CS304 (manually written) Issue link: https://github.com/jhy/jsoup/issues/1724
     @Test public void xmlSyntaxEscapesRtInAttributes() {
         // Make sure > is escaped in attributes in xhtml escape mode
         // https://github.com/jhy/jsoup/issues/1724
@@ -300,6 +301,7 @@ public class XmlTreeBuilderTest {
         assertEquals("<input class=\"text\" value=\" &gt; data &lt; \" />", doc.html());
     }
 
+    // CS304 (manually written) Issue link: https://github.com/jhy/jsoup/issues/1724
     @Test public void xhtmlModeEscapesInAttributes() {
         Document doc = Jsoup.parse("<p one='&lt;two&gt;&copy'>Three</p>", "", Parser.xmlParser());
         doc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);

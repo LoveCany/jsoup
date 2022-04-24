@@ -210,6 +210,7 @@ public class Entities {
                         break;
                     case '>':
                         // should escape in xhtml mode, although in xml syntax it could be ignored by default
+                        // CS304 Issue link: https://github.com/jhy/jsoup/issues/1724
                         if (!inAttribute || escapeMode == EscapeMode.xhtml)
                             accum.append("&gt;");
                         else

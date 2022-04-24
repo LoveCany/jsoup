@@ -1,49 +1,61 @@
-# jsoup: Java HTML Parser
+# Progress Report
 
-**jsoup** is a Java library for working with real-world HTML. It provides a very convenient API for fetching URLs and extracting and manipulating data, using the best of HTML5 DOM methods and CSS selectors.
+Group Name: TheSeventhOne
 
-**jsoup** implements the [WHATWG HTML5](https://html.spec.whatwg.org/multipage/) specification, and parses HTML to the same DOM as modern browsers do.
+## Members
 
-* scrape and [parse](https://jsoup.org/cookbook/input/parse-document-from-string) HTML from a URL, file, or string
-* find and [extract data](https://jsoup.org/cookbook/extracting-data/selector-syntax), using DOM traversal or CSS selectors
-* manipulate the [HTML elements](https://jsoup.org/cookbook/modifying-data/set-html), attributes, and text
-* [clean](https://jsoup.org/cookbook/cleaning-html/safelist-sanitizer) user-submitted content against a safe-list, to prevent XSS attacks
-* output tidy HTML
+| Name | SID      |
+|------|----------|
+| 赵奕沣  | 11811525 |
+| 李文凯  | 11712704 |
+| 何智刚  | 11713004 |
+| 戴翔   | 11811205 |
+| 李晗晓  | 11812511 |
 
-jsoup is designed to deal with all varieties of HTML found in the wild; from pristine and validating, to invalid tag-soup; jsoup will create a sensible parse tree.
 
-See [**jsoup.org**](https://jsoup.org/) for downloads and the full [API documentation](https://jsoup.org/apidocs/).
+## Chosen Issue
 
-[![Build Status](https://github.com/jhy/jsoup/workflows/Build/badge.svg)](https://github.com/jhy/jsoup/actions?query=workflow%3ABuild)
+>There happen contact problems (like some teammates haven't fixed his own issue yet, as of report time, 
+>or some of them just never tells his progress), so I will only tell the issue I am assigned to in this report. 
+>And I will send related information later.
 
-## Example
-Fetch the [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) homepage, parse it to a [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction), and select the headlines from the *In the News* section into a list of [Elements](https://jsoup.org/apidocs/index.html?org/jsoup/select/Elements.html):
+**#1724 in Jsoup**
 
-```java
-Document doc = Jsoup.connect("https://en.wikipedia.org/").get();
-log(doc.title());
-Elements newsHeadlines = doc.select("#mp-itn b a");
-for (Element headline : newsHeadlines) {
-  log("%s\n\t%s", 
-    headline.attr("title"), headline.absUrl("href"));
-}
-```
-[Online sample](https://try.jsoup.org/~LGB7rk_atM2roavV0d-czMt3J_g), [full source](https://github.com/jhy/jsoup/blob/master/src/main/java/org/jsoup/examples/Wikipedia.java).
+XML Escape mode should escape > in attributes
 
-## Open source
-jsoup is an open source project distributed under the liberal [MIT license](https://jsoup.org/license). The source code is available on [GitHub](https://github.com/jhy/jsoup).
+### Reason for Choosing
 
-## Getting started
-1. [Download](https://jsoup.org/download) the latest jsoup jar (or add it to your Maven/Gradle build)
-2. Read the [cookbook](https://jsoup.org/cookbook/)
-3. Enjoy!
+It relates to encoding problems for security, which is easy to understand and fix.
+Besides, ideal issues to be fixed in the future may have relation to it, which can be seen as a dependency.
 
-## Development and support
-If you have any questions on how to use jsoup, or have ideas for future development, please get in touch via the [mailing list](https://jsoup.org/discussion).
+### Test Scenario
 
-If you find any issues, please file a [bug](https://jsoup.org/bugs) after checking for duplicates.
+1. Handle special character in parameter between quotation marks
 
-The [colophon](https://jsoup.org/colophon) talks about the history of and tools used to build jsoup.
+   Like handling string parameter in normal programs, special characters can also appear in parameter fields in HTML. 
 
-## Status
-jsoup is in general, stable release.
+2. Escape html tags
+
+   HTML tags may happen in parameter field, which is called "Nesting" for some purpose. 
+   By escaping, it will be seen as normal text and makes no sense.
+
+### Related Pull Request
+
+[Link for pull request](https://github.com/jhy/jsoup/pull/1758)
+
+### Code Standard
+
+I have run Checkstyle, SpotBugs and PMD. There occur warnings in given level. 
+But they cannot be prevented as following original code style does so in the repository, and I just follow it.
+
+## Schedule
+
+| Week    | Task           |
+|---------|----------------|
+| Week 12 | Anti-Spider    |
+| Week 13 | SSRF knowledge |
+| Week 14 | Authentication |
+
+## Lab Session
+
+Lab Session 2
