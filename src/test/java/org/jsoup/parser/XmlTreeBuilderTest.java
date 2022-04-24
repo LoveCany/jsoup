@@ -297,7 +297,7 @@ public class XmlTreeBuilderTest {
         doc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);
         doc.outputSettings().charset("ascii");
         assertEquals(doc.outputSettings().syntax(), Syntax.xml);
-        assertEquals("<input class=\"text\" value=\" &gt; data &lt; \">", doc.html());
+        assertEquals("<input class=\"text\" value=\" &gt; data &lt; \"/>", doc.html());
     }
 
     @Test void xmlOutputCorrectsInvalidAttributeNames() {
